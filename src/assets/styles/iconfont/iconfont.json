@@ -1,0 +1,37 @@
+{
+  "id": "2555871",
+  "name": "travel",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2051009",
+      "name": "back",
+      "font_class": "back",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "3843705",
+      "name": "drop",
+      "font_class": "drop",
+      "unicode": "e708",
+      "unicode_decimal": 59144
+    },
+    {
+      "icon_id": "4099292",
+      "name": "image",
+      "font_class": "image",
+      "unicode": "ee46",
+      "unicode_decimal": 60998
+    },
+    {
+      "icon_id": "6531979",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

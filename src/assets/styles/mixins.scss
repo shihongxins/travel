@@ -1,0 +1,13 @@
+@mixin input-reset {
+  outline: none;
+  margin: 0;
+  border: none;
+  padding: 0;
+  width: 100%;
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
