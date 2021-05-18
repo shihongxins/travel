@@ -16,6 +16,12 @@ import fastclick from 'fastclick'
 // 5.安装 sass 与 sass-loader@7 ，并编写 base.scss 引入，重置 html 根字体大小为 100 px 方便适配计算
 import 'styles/base.scss'
 
+// 安装 vue-awesome-swiper@2.6.7 插件，实现首页轮播效果 https://github.com/surmon-china/vue-awesome-swiper/tree/v2.6.7
+// 此插件 @2.6.7 版本基于 Swiper 3 https://3.swiper.com.cn/api/index.html
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.min.css'
+Vue.use(VueAwesomeSwiper)
+
 fastclick.attach(document.body)
 
 Vue.config.productionTip = false
