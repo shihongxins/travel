@@ -1,75 +1,76 @@
 <template>
-  <div class="container">
-    <div class="container__section">
-      <h3 class="container__section__title border-topbottom">当前城市</h3>
-      <ul class="container__section__list">
-        <li class="container__section__list__item">
-          <div class="button">北京</div>
-        </li>
-      </ul>
-    </div>
-    <div class="container__section">
-      <h3 class="container__section__title border-topbottom">热门城市</h3>
-      <ul class="container__section__list">
-        <li class="container__section__list__item">
-          <div class="button">北京</div>
-        </li>
-        <li class="container__section__list__item">
-          <div class="button">上海</div>
-        </li>
-        <li class="container__section__list__item">
-          <div class="button">广州</div>
-        </li>
-        <li class="container__section__list__item">
-          <div class="button">深圳</div>
-        </li>
-        <li class="container__section__list__item">
-          <div class="button">成都</div>
-        </li>
-        <li class="container__section__list__item">
-          <div class="button">重庆</div>
-        </li>
-      </ul>
-    </div>
-    <div class="container__section">
-      <h3 class="container__section__title border-topbottom">A</h3>
-      <ul class="container__section__list citys__list--vertical">
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-      </ul>
-    </div>
-    <div class="container__section">
-      <h3 class="container__section__title border-topbottom">A</h3>
-      <ul class="container__section__list citys__list--vertical">
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-      </ul>
-    </div>
-    <div class="container__section">
-      <h3 class="container__section__title border-topbottom">A</h3>
-      <ul class="container__section__list citys__list--vertical">
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-        <li class="container__section__list__item border-bottom">阿拉善</li>
-      </ul>
+  <!-- 使用 Better-scroll 插件完成滚动（主要是需要与字母表联动，不然普通滚动可用定位完成） -->
+  <div class="container" ref="betterScrollContainer">
+    <div class="better-scroll__wrapper">
+      <div class="container__section">
+        <h3 class="container__section__title border-topbottom">当前城市</h3>
+        <ul class="container__section__list">
+          <li class="container__section__list__item">
+            <div class="button">北京</div>
+          </li>
+        </ul>
+      </div>
+      <div class="container__section">
+        <h3 class="container__section__title border-topbottom">热门城市</h3>
+        <ul class="container__section__list">
+          <li
+            class="container__section__list__item"
+            v-for="hotCity in hotCities"
+            :key="hotCity.id">
+            <div class="button">{{hotCity.name}}</div>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="container__section"
+        v-for="(list,character) in cities"
+        :key="character"
+        :ref="character">
+        <!-- ref 绑定 character 的作用是与传入的 character 对比，然后通过 better-scroll 滚动到此元素 -->
+        <h3 class="container__section__title border-topbottom">{{character}}</h3>
+        <ul class="container__section__list cities__list--vertical">
+          <li
+            class="container__section__list__item border-bottom"
+            v-for="city in list"
+            :key="city.id">{{city.name}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// 引入 Better-Scroll 完成与字母表的联动滚动
+import BetterScroll from 'better-scroll'
+
 export default {
-  name: 'CityList'
+  name: 'CityList',
+  props: {
+    character: {
+      type: String,
+      default: 'A'
+    },
+    hotCities: {
+      type: Array,
+      default: () => []
+    },
+    cities: {
+      type: [Object, Array],
+      default: () => {}
+    }
+  },
+  updated () {
+    // 实例化滚动插件
+    this.betterScroll = new BetterScroll(this.$refs.betterScrollContainer)
+  },
+  // 监听 character 变化，然后滚动到 refs 中的 character 元素
+  watch: {
+    character () {
+      const elem = this.$refs[this.character][0]
+      this.betterScroll.refresh()
+      this.betterScroll.scrollToElement(elem)
+    }
+  }
 }
 </script>
 
@@ -87,6 +88,14 @@ export default {
 }
 
 .container {
+  // 给容器设置绝对定位，并固定大小，使 Better-Scroll 插件监听滚动生效
+  position: absolute;
+  // 顶部留出标题按钮和搜索框高度
+  top: .87rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
   &__section {
     &__title {
       @include section__title;
@@ -112,7 +121,7 @@ export default {
         }
       }
       // 具体详细城市列表
-      &.citys__list--vertical {
+      &.cities__list--vertical {
         flex-flow: column nowrap;
         padding: 0;
         line-height: .38rem;

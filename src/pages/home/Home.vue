@@ -40,13 +40,18 @@ export default {
     getHomeData () {
       // 向 api 地址请求数据，实际上会被 /config/index.js 中的 proxyTable 配置拦截转发到本地的模拟数据
       axios.get('/api/home.json')
-        .then(this.getHomeDataSuccess)
+        .then((responce) => {
+          if (responce && responce.data) {
+            this.getHomeDataSuccess(responce.data)
+          } else {
+            throw new Error('加载城市数据失败！' + responce.request.responseText)
+          }
+        })
     },
     // 获取数据成功
     getHomeDataSuccess (res) {
-      const result = res.data
-      if (result && result.ret && result.data) {
-        const data = result.data
+      if (res && res.ret && res.data) {
+        const data = res.data
         this.city = data.city
         this.swiperList = data.swiperList
         this.iconList = data.iconList
