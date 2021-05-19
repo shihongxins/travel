@@ -41,17 +41,10 @@ export default {
   // 与图标区域的间隙
   margin-top: .1rem;
   &__title {
-    margin: 0;
-    line-height: .4rem;
-    font-size: .14rem;
-    font-weight: normal;
-    text-indent: .1rem;
-    background: #eee;
+    @include section__title;
   }
   &__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    @include reset--list;
   }
   &__item {
     // 非固定大小图片，自适应屏幕大小的固定宽高比图片，需要用 padding-bottom 占位

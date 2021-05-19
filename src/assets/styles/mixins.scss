@@ -1,13 +1,71 @@
-@mixin input-reset {
+@import './variables.scss';
+
+// 通用样式
+@mixin reset--input {
   outline: none;
   margin: 0;
   border: none;
   padding: 0;
   width: 100%;
 }
-
+@mixin reset--list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 @mixin ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+// 首部 header 样式
+@mixin header {
+  line-height: $lineheight--header; // 设计稿是按 750px 设计的 86px ，是 iphone 6 的两倍
+  color: #fff;
+  background: $bgcolor--main;
+}
+
+// 首部 header 中的返回按钮 btn--back 样式
+@mixin btn--back {
+  width: .3rem;
+  height: $lineheight--header;
+  text-align: center;
+  .icon-back {
+    font-size: .23rem;
+    vertical-align: middle;
+  }
+}
+
+// 首部搜索框输入样式
+@mixin input--search {
+  padding: 0 .1rem;
+  height: $lineheight--header;
+  position: relative;
+  .icon-search {
+    position: absolute;
+    top: .01rem;
+    left: 1em;
+    color: #ccc;
+  }
+  input {
+    @include reset--input;
+    padding: 0 1em 0 2em;
+    height: .32rem;
+    line-height: .32rem;
+    vertical-align: middle;
+    color: #ccc;
+    background: #fff;
+    border-radius: .05rem;
+  }
+}
+
+// 章节标题样式
+@mixin section__title {
+  margin: 0;
+  line-height: .4rem;
+  font-size: .14rem;
+  font-weight: normal;
+  text-indent: .1rem;
+  background: #eee;
 }

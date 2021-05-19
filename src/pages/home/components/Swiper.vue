@@ -9,7 +9,7 @@
         v-for="img in swiperList"
         :key="img.id">
         <img
-          class="carousel-img"
+          class="carousel__img"
           :src="img.imgUrl"
         />
       </swiper-slide>
@@ -68,7 +68,7 @@ export default {
   height: 0;
   overflow: hidden;
   background: #eee;
-  .carousel-img {
+  .carousel__img {
     width: 100%; // 图片充满整个容器
   }
 }

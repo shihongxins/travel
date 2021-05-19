@@ -4,5 +4,9 @@ html {
 body {
   font-size: .14rem;
 }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 // 引入字体图标
 @import url('./iconfont/iconfont.css');

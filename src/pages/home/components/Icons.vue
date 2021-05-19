@@ -108,7 +108,7 @@ export default {
       height: .22rem;
       line-height: .22rem;
       text-align: center;
-      color: $textcolor-main;
+      color: $textcolor--main;
       // 防止图标描述溢出
       @include ellipsis;
     }

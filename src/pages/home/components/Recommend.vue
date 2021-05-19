@@ -39,17 +39,10 @@ export default {
   // 与图标区域的间隙
   margin-top: .1rem;
   &__title {
-    margin: 0;
-    line-height: .4rem;
-    font-size: .14rem;
-    font-weight: normal;
-    text-indent: .1rem;
-    background: #eee;
+    @include section__title;
   }
   &__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    @include reset--list;
   }
   &__item {
     height: .85rem;
