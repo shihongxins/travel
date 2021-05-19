@@ -6,7 +6,7 @@
         <h3 class="container__section__title border-topbottom">当前城市</h3>
         <ul class="container__section__list">
           <li class="container__section__list__item">
-            <div class="button">{{this.$store.state.currentCity}}</div>
+            <div class="button">{{this.currentCity}}</div>
           </li>
         </ul>
       </div>
@@ -44,6 +44,7 @@
 <script>
 // 引入 Better-Scroll 完成与字母表的联动滚动
 import BetterScroll from 'better-scroll'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'CityList',
@@ -73,10 +74,17 @@ export default {
       this.betterScroll.scrollToElement(elem)
     }
   },
+  computed: {
+    // 使用 mapState
+    ...mapState(['currentCity'])
+  },
   methods: {
+    ...mapMutations(['changeCurrentCity']),
     handleCityItemClick (city) {
       // 更新 vuex state 不含异步操作，直接提交，不用 dispatch 分发给 action
-      this.$store.commit('changeCurrentCity', city)
+      // this.$store.commit('changeCurrentCity', city)
+      // 使用 mapMutations
+      this.changeCurrentCity(city)
       // 更新完后转到首页
       this.$router.push('/')
     }

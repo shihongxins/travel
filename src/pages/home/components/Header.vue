@@ -9,15 +9,20 @@
     </div>
     <router-link to="/city">
       <div class="droplist">
-        {{this.$store.state.currentCity}}<i class="iconfont icon-drop"></i>
+        {{this.currentCity}}<i class="iconfont icon-drop"></i>
       </div>
     </router-link>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+  computed: {
+    ...mapState(['currentCity'])
+  }
 }
 </script>
 

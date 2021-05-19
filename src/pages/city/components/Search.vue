@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'CitySearch',
   props: {
@@ -70,9 +71,12 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['changeCurrentCity']),
     handleCityItemClick (city) {
       // 更新 vuex state 不含异步操作，直接提交，不用 dispatch 分发给 action
-      this.$store.commit('changeCurrentCity', city)
+      // this.$store.commit('changeCurrentCity', city)
+      // 使用 mapMutations
+      this.changeCurrentCity(city)
       // 更新完后转到首页
       this.$router.push('/')
     }
