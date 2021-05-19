@@ -4,7 +4,7 @@
     <ul class="weekendgo__list">
       <li
         class="weekendgo__item border-bottom"
-        v-for="weekendgo in weekendgoList"
+        v-for="weekendgo in weekendList"
         :key="weekendgo.id">
         <!-- 与 Recommend 不同，此处非固定图片大小，而是根据屏幕自适应宽高比，因此需要一个容器 -->
         <div class="weekendgo__item__img__wrapper">
@@ -25,34 +25,10 @@
 <script>
 export default {
   name: 'HomeWeekendGo',
-  data () {
-    return {
-      weekendgoList: [{
-        id: '0001',
-        imgUrl: 'https://qdywxs.github.io/travel-images/weekendList01.jpg',
-        title: '北京温泉排行榜',
-        desc: '细数北京温泉，温暖你的冬天'
-      }, {
-        id: '0002',
-        imgUrl: 'https://qdywxs.github.io/travel-images/weekendList02.jpg',
-        title: '北京必游TOP10',
-        desc: '来北京必去的景点非这些地方莫属'
-      }, {
-        id: '0003',
-        imgUrl: 'https://qdywxs.github.io/travel-images/weekendList03.jpg',
-        title: '寻找北京的皇城范儿',
-        desc: '数百年的宫廷庙宇，至今依旧威严霸气'
-      }, {
-        id: '0004',
-        imgUrl: 'https://qdywxs.github.io/travel-images/weekendList04.jpg',
-        title: '学生最爱的博物馆',
-        desc: '周末干嘛？北京很多博物馆已经免费开放啦'
-      }, {
-        id: '0005',
-        imgUrl: 'https://qdywxs.github.io/travel-images/weekendList05.jpg',
-        title: '儿童剧场，孩子的乐园',
-        desc: '带宝贝观看演出，近距离体验艺术的无穷魅力'
-      }]
+  props: {
+    weekendList: {
+      type: Array,
+      default: () => []
     }
   }
 }

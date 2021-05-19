@@ -1,12 +1,15 @@
 <template>
-  <div class="swiper-container">
-    <swiper :options="swiperOption">
+  <div class="carousel">
+    <swiper
+      ref="mySwiper"
+      v-if="showSwiper"
+      :options="swiperOption">
       <!-- slides -->
       <swiper-slide
         v-for="img in swiperList"
         :key="img.id">
         <img
-          class="swiper-img"
+          class="carousel-img"
           :src="img.imgUrl"
         />
       </swiper-slide>
@@ -25,27 +28,31 @@ export default {
       swiperOption: {
         pagination: '.swiper-pagination',
         loop: true,
-        autoplay: 3000
-      },
-      swiperList: [
-        {
-          /* 4️⃣-①：在 data 中，定义一个 swiperList 数组（模拟数据， 数组里有四个对象，每个对象包含一个 id 和一个图片地址）； */
-          id: '0001',
-          imgUrl: 'https://qdywxs.github.io/travel-images/swiperList01.jpg'
-        },
-        {
-          id: '0002',
-          imgUrl: 'https://qdywxs.github.io/travel-images/swiperList02.jpg'
-        },
-        {
-          id: '0003',
-          imgUrl: 'https://qdywxs.github.io/travel-images/swiperList03.jpg'
-        },
-        {
-          id: '0004',
-          imgUrl: 'https://qdywxs.github.io/travel-images/swiperList04.jpg'
+        autoplay: 3000,
+        /**
+         * NOTE: 一下配置均是为了解决，swiper3 异步加载数据，轮播图片更新了，分页器没有更新
+         * 设置 abserver,observeParents 后也只是在下一轮更新
+         * 最终通过回调函数 onSlideChangeStart 再每次切换图片后执行一次 update 解决
+         * https://github.com/surmon-china/vue-awesome-swiper/issues/237
+         * https://3.swiper.com.cn/api/function/2015/0308/257.html
+         */
+        observer: true,
+        observeParents: true,
+        onSlideChangeEnd (swiper) {
+          swiper.update()
         }
-      ]
+      }
+    }
+  },
+  props: {
+    swiperList: {
+      type: Array,
+      default: () => []
+    }
+  },
+  computed: {
+    showSwiper () {
+      return this.swiperList.length
     }
   }
 }
@@ -53,7 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 // 设置轮播图容器样式（主要设置宽高比，防止图片加载时抖动，不直接写死宽高的原因是本项目要自适应）
-.swiper-container {
+.carousel {
   padding-bottom: percentage(
     200/640
   ); // 容器高度由 padding-bottom 撑开（按图片宽高比自适应屏幕大小），防止图片加载时抖动
@@ -61,12 +68,12 @@ export default {
   height: 0;
   overflow: hidden;
   background: #eee;
-  .swiper-img {
+  .carousel-img {
     width: 100%; // 图片充满整个容器
   }
 }
 // Vue深度作用选择器修改公共组件中的 scoped 的样式
-.swiper-container >>> .swiper-pagination-bullet {
+.carousel >>> .swiper-pagination-bullet {
   background: #ccc;
   &-active {
     background: #eee;

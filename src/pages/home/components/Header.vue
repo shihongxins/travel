@@ -8,14 +8,20 @@
       <input type="search" placeholder="输入城市/景点/游玩主题">
     </div>
     <div class="droplist">
-      城市<i class="iconfont icon-drop"></i>
+      {{city}}<i class="iconfont icon-drop"></i>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+  props: {
+    city: {
+      type: String,
+      default: () => '北京'
+    }
+  }
 }
 </script>
 

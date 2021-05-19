@@ -1,6 +1,8 @@
 <template>
   <div class="icons">
-    <swiper :options="swiperOption">
+    <swiper
+      :options="swiperOption"
+      v-if="showSwiper">
       <swiper-slide
         v-for="(icons,page) in iconPages"
         :key="page">
@@ -30,44 +32,13 @@ export default {
         pagination: '.swiper-pagination',
         loop: true,
         autoplay: 0 // 禁止自动轮播
-      },
-      iconList: [{
-        id: '0001',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList01.png',
-        desc: '景点门票'
-      }, {
-        id: '0002',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList02.png',
-        desc: '滑雪季'
-      }, {
-        id: '0003',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList03.png',
-        desc: '泡温泉'
-      }, {
-        id: '0004',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList04.png',
-        desc: '动植园'
-      }, {
-        id: '0005',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList05.png',
-        desc: '游乐园'
-      }, {
-        id: '0006',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList06.png',
-        desc: '必游榜单'
-      }, {
-        id: '0007',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList07.png',
-        desc: '演出'
-      }, {
-        id: '0008',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList08.png',
-        desc: '城市观光'
-      }, {
-        id: '0009',
-        imgUrl: 'https://qdywxs.github.io/travel-images/iconList09.png',
-        desc: '一日游'
-      }]
+      }
+    }
+  },
+  props: {
+    iconList: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {
@@ -79,6 +50,9 @@ export default {
         data[page].push(item)
       })
       return data
+    },
+    showSwiper () {
+      return this.iconList.length
     }
   }
 }
