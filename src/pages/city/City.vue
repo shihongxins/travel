@@ -1,6 +1,7 @@
 <template>
   <div class="city">
     <CityHeader />
+    <CitySearch :cities="cities" />
     <CityList
       :character="character"
       :hotCities="hotCities"
@@ -13,6 +14,7 @@
 
 <script>
 import CityHeader from './components/Header'
+import CitySearch from './components/Search'
 import CityList from './components/List'
 import CityAlphabet from './components/Alphabet'
 import axios from 'axios'
@@ -21,6 +23,7 @@ export default {
   name: 'City',
   components: {
     CityHeader,
+    CitySearch,
     CityList,
     CityAlphabet
   },

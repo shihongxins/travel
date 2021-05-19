@@ -6,10 +6,6 @@
       </div>
     </router-link>
     <div class="header__title">城市选择</div>
-    <div class="input--search">
-      <i class="iconfont icon-search"></i>
-      <input type="search" placeholder="输入城市名或拼音">
-    </div>
   </div>
 </template>
 
@@ -32,12 +28,6 @@ export default {
   &__title {
     height: .43rem;
     text-align: center;
-  }
-  .input--search {
-    @include input--search;
-    input {
-      text-align: center;
-    }
   }
 }
 </style>
