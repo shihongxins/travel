@@ -15,7 +15,8 @@
         <li
           class="search__result__item border-bottom"
           v-for="city in result"
-          :key="city.id">{{city.name}}</li>
+          :key="city.id"
+          @click="handleCityItemClick(city.name)">{{city.name}}</li>
         <!-- 关键字没有搜索到时提醒信息 -->
         <li
           class="search__result__item border-bottom"
@@ -66,6 +67,14 @@ export default {
         }
         this.result = tempRes
       }, 30)
+    }
+  },
+  methods: {
+    handleCityItemClick (city) {
+      // 更新 vuex state 不含异步操作，直接提交，不用 dispatch 分发给 action
+      this.$store.commit('changeCurrentCity', city)
+      // 更新完后转到首页
+      this.$router.push('/')
     }
   }
 }

@@ -9,7 +9,7 @@
     </div>
     <router-link to="/city">
       <div class="droplist">
-        {{city}}<i class="iconfont icon-drop"></i>
+        {{this.$store.state.currentCity}}<i class="iconfont icon-drop"></i>
       </div>
     </router-link>
   </div>
@@ -17,13 +17,7 @@
 
 <script>
 export default {
-  name: 'HomeHeader',
-  props: {
-    city: {
-      type: String,
-      default: () => '北京'
-    }
-  }
+  name: 'HomeHeader'
 }
 </script>
 

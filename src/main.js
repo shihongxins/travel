@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
 // 2.引入 normalize.css
 import 'normalize.css'
@@ -30,6 +31,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store, // 将 vuex store 传入根实例
   components: { App },
   template: '<App/>'
 })

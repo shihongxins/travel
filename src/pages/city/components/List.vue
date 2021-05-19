@@ -6,7 +6,7 @@
         <h3 class="container__section__title border-topbottom">当前城市</h3>
         <ul class="container__section__list">
           <li class="container__section__list__item">
-            <div class="button">北京</div>
+            <div class="button">{{this.$store.state.currentCity}}</div>
           </li>
         </ul>
       </div>
@@ -16,7 +16,8 @@
           <li
             class="container__section__list__item"
             v-for="hotCity in hotCities"
-            :key="hotCity.id">
+            :key="hotCity.id"
+            @click="handleCityItemClick(hotCity.name)">
             <div class="button">{{hotCity.name}}</div>
           </li>
         </ul>
@@ -32,7 +33,8 @@
           <li
             class="container__section__list__item border-bottom"
             v-for="city in list"
-            :key="city.id">{{city.name}}</li>
+            :key="city.id"
+            @click="handleCityItemClick(city.name)">{{city.name}}</li>
         </ul>
       </div>
     </div>
@@ -69,6 +71,14 @@ export default {
       const elem = this.$refs[this.character][0]
       this.betterScroll.refresh()
       this.betterScroll.scrollToElement(elem)
+    }
+  },
+  methods: {
+    handleCityItemClick (city) {
+      // 更新 vuex state 不含异步操作，直接提交，不用 dispatch 分发给 action
+      this.$store.commit('changeCurrentCity', city)
+      // 更新完后转到首页
+      this.$router.push('/')
     }
   }
 }
