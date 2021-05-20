@@ -1,17 +1,20 @@
 <template>
-  <div>
+  <div class="banner__container">
     <div class="banner" @click="handleToggleShowGallery(true)">
-      <img class="banner__img" src="https://qdywxs.github.io/travel-images/detail-banner-img.jpg" alt="">
+      <img
+        class="banner__img"
+        :src="bannerImg"
+        :alt="sightName" >
       <div class="banner__info">
-        <h3 class="banner__info__title">故宫</h3>
+        <h3 class="banner__info__title">{{sightName}}</h3>
         <div class="banner__info__count">
-          <i class="iconfont icon-image"></i> {{'3'}}
+          <i class="iconfont icon-image"></i> {{galleryImgs.length}}
         </div>
       </div>
     </div>
     <Gallery
       v-show="showGallery"
-      :imgs="imgs"
+      :imgs="galleryImgs"
       @close="handleToggleShowGallery(false)" />
   </div>
 </template>
@@ -24,12 +27,23 @@ export default {
   components: {
     Gallery
   },
+  props: {
+    sightName: {
+      type: String,
+      default: ''
+    },
+    bannerImg: {
+      type: String,
+      default: ''
+    },
+    galleryImgs: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
-      showGallery: false,
-      imgs: [
-        'https://qdywxs.github.io/travel-images/detail-gallary-img01.jpg',
-        'https://qdywxs.github.io/travel-images/detail-gallary-img02.jpg']
+      showGallery: false
     }
   },
   methods: {

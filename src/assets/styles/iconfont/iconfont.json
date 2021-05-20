@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2767338",
+      "name": "ticket",
+      "font_class": "ticket",
+      "unicode": "e76a",
+      "unicode_decimal": 59242
+    },
+    {
       "icon_id": "2051009",
       "name": "back",
       "font_class": "back",
