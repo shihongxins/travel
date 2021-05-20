@@ -13,6 +13,11 @@
   margin: 0;
   padding: 0;
 }
+@mixin reset--box {
+  margin: auto;
+  border: none;
+  padding: auto;
+}
 @mixin ellipsis {
   white-space: nowrap;
   overflow: hidden;
