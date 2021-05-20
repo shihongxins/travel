@@ -5,7 +5,7 @@
       v-for="character in cityAlphabet"
       :key="character"
       @click="handleCharacterClick"
-      @touchstart="handleAlphabetTouchstart"
+      @touchstart.prevent="handleAlphabetTouchstart"
       @touchmove="handleAlphabetTouchmove"
       @touchend="handleAlphabetTouchend">{{character}}</li>
   </ul>
@@ -37,8 +37,8 @@ export default {
     }
   },
   updated () {
-    // A 据屏幕顶部的距离
-    this.touchEventData.offsetTop = this.$refs.alphabetElem.children[0].offsetTop
+    // A 据屏幕顶部的距离 = A 距容器的距离 + A的容器距屏幕的距离
+    this.touchEventData.offsetTop = this.$refs.alphabetElem.children[0].offsetTop + this.$refs.alphabetElem.offsetTop
   },
   methods: {
     handleCharacterClick (e) {
@@ -91,7 +91,7 @@ export default {
 .city__alphabet {
   @include reset--list;
   position: absolute;
-  top: 0;
+  top: .87rem;
   right: 0;
   bottom: 0;
   width: .2rem;

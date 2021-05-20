@@ -88,6 +88,9 @@ export default {
       // 更新完后转到首页
       this.$router.push('/')
     }
+  },
+  deactivated () {
+    this.betterScroll.scrollTo(0, 0)
   }
 }
 </script>
