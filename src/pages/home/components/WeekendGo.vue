@@ -2,10 +2,12 @@
   <div class="weekendgo">
     <h2 class="weekendgo__title">周末去哪儿</h2>
     <ul class="weekendgo__list">
-      <li
+      <router-link
         class="weekendgo__item border-bottom"
         v-for="weekendgo in weekendList"
-        :key="weekendgo.id">
+        :key="weekendgo.id"
+        tag="li"
+        :to="`/detail/${weekendgo.id}`">
         <!-- 与 Recommend 不同，此处非固定图片大小，而是根据屏幕自适应宽高比，因此需要一个容器 -->
         <div class="weekendgo__item__img__wrapper">
           <img
@@ -17,7 +19,7 @@
           <h3 class="weekendgo__item__title">{{weekendgo.title}}</h3>
           <p class="weekendgo__item__desc">{{weekendgo.desc}}</p>
         </div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>

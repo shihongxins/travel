@@ -12,19 +12,23 @@
         </div>
       </div>
     </div>
-    <Gallery
-      v-show="showGallery"
-      :imgs="galleryImgs"
-      @close="handleToggleShowGallery(false)" />
+    <AnimationFade>
+      <Gallery
+        v-show="showGallery"
+        :imgs="galleryImgs"
+        @close="handleToggleShowGallery(false)" />
+    </AnimationFade>
   </div>
 </template>
 
 <script>
+import AnimationFade from 'components/animations/fade/Fade.vue'
 import Gallery from 'components/gallery/Gallery.vue'
 
 export default {
   name: 'DetailBanner',
   components: {
+    AnimationFade,
     Gallery
   },
   props: {
