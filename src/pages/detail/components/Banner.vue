@@ -51,8 +51,18 @@ export default {
     }
   },
   methods: {
+    defferScroll (e) {
+      e.preventDefault()
+    },
     handleToggleShowGallery (show) {
       this.showGallery = show
+      if (show) {
+        window.addEventListener('wheel', this.defferScroll, {passive: false})
+        window.addEventListener('touchmove', this.defferScroll, {passive: false})
+      } else {
+        window.removeEventListener('wheel', this.defferScroll, {passive: false})
+        window.removeEventListener('touchmove', this.defferScroll, {passive: false})
+      }
     }
   }
 }
