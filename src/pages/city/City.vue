@@ -17,7 +17,7 @@ import CityHeader from './components/Header'
 import CitySearch from './components/Search'
 import CityList from './components/List'
 import CityAlphabet from './components/Alphabet'
-import axios from 'axios'
+import { getCitiesData } from '../../api/index'
 
 export default {
   name: 'City',
@@ -35,22 +35,13 @@ export default {
     }
   },
   methods: {
-    getCitiesData () {
-      axios.get('/api/city.json')
-        .then((responce) => {
-          if (responce && responce.data) {
-            this.getCitiesDataSuccess(responce.data)
-          } else {
-            throw new Error('加载城市数据失败！' + responce.request.responseText)
-          }
-        })
-    },
-    getCitiesDataSuccess (res) {
-      if (res && res.ret && res.data) {
-        const data = res.data
+    // 定义初始化数据的方法
+    loadCitiesData () {
+      // 发送请求获取数据
+      getCitiesData().then((data) => {
         this.hotCities = data.hotCities
         this.cities = data.cities
-      }
+      })
     },
     handleAlphabetChange (character) {
       if (character) {
@@ -59,7 +50,8 @@ export default {
     }
   },
   mounted () {
-    this.getCitiesData()
+    // 在 mounted 已挂载生命周期钩子时，调用初始化数据的方法，发送请求
+    this.loadCitiesData()
   }
 }
 </script>

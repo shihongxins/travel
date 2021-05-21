@@ -14,9 +14,8 @@ import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekendGo from './components/WeekendGo'
-// 引入 axios ，发送网络请求
-import axios from 'axios'
 import { mapState } from 'vuex'
+import { getHomeData } from '../../api/index'
 
 export default {
   name: 'Home',
@@ -40,32 +39,20 @@ export default {
     ...mapState(['currentCity'])
   },
   methods: {
-    // 定义获取首页数据的办法
-    getHomeData () {
-      // 向 api 地址请求数据，实际上会被 /config/index.js 中的 proxyTable 配置拦截转发到本地的模拟数据
-      axios.get('/api/home.json?city=' + this.currentCity)
-        .then((responce) => {
-          if (responce && responce.data) {
-            this.getHomeDataSuccess(responce.data)
-          } else {
-            throw new Error('加载城市数据失败！' + responce.request.responseText)
-          }
-        })
-    },
-    // 获取数据成功
-    getHomeDataSuccess (res) {
-      if (res && res.ret && res.data) {
-        const data = res.data
+    // 定义初始化数据的方法
+    loadHomeData () {
+      // 发送请求获取数据
+      getHomeData(this.currentCity).then((data) => {
         this.swiperList = data.swiperList
         this.iconList = data.iconList
         this.recommendList = data.recommendList
         this.weekendList = data.weekendList
-      }
+      })
     }
   },
   mounted () {
-    // 在 mounted 已挂载生命周期钩子时，调用获取数据的方法，发送请求
-    this.getHomeData()
+    // 在 mounted 已挂载生命周期钩子时，调用初始化数据的方法，发送请求
+    this.loadHomeData()
     // 保存当前的 city
     this.lastCity = this.currentCity
   },
@@ -73,7 +60,7 @@ export default {
   activated () {
     if (this.lastCity !== this.currentCity) {
       this.lastCity = this.currentCity
-      this.getHomeData()
+      this.loadHomeData()
     }
   }
 }

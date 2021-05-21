@@ -1,7 +1,7 @@
 <template>
   <div class="gallery__container" @click="handleGalleryClick">
     <div class="gallery__wrapper">
-      <swiper :options="swiperOption">
+      <swiper :options="swiperOption" v-if="imgs.length">
         <!-- slides -->
         <swiper-slide
           v-for="(url,index) in imgs"
