@@ -58,7 +58,9 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    // 部署项目到仓库下的 Github pages
+    // assetsPublicPath: '/',
+    assetsPublicPath: '/travel/',
 
     /**
      * Source Maps
